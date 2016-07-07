@@ -30,9 +30,6 @@ set showmatch               " highlight matching [{()}]
 set incsearch               " search as characters are entered
 set hlsearch                " highlight matches
 
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
-
 " }}}
 
 " Folding {{{
@@ -46,12 +43,28 @@ set foldmethod=indent       " fold based on indent level
 
 " Movement {{{
 
-" kj is escape
-inoremap kj <esc>
+" jj is escape
+inoremap jj <esc>
 
 " }}}
 
 " Leader Shortcuts {{{
+
+" set leader key to space
+let mapleader=" "
+
+" save the file and keep editing
+nnoremap <leader>s :w<CR>
+
+" save the file and exit
+nnoremap <leader>w :wq<CR>
+
+" quit without saving
+nnoremap <leader>q :q<CR>
+
+" turn off search highlight
+nnoremap <leader><space> :noh<CR>
+
 " }}}
 
 set colorcolumn=80
