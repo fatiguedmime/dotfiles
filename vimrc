@@ -81,7 +81,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'kien/ctrlp.vim'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -91,6 +91,28 @@ call plug#end()
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
+
+" }}}
+
+" ConEmu Config {{{
+
+if !empty($CONEMUBUILD)
+  " Visual
+  set term=xterm
+  set encoding=utf-8
+  set termencoding=&encoding
+  set t_Co=16
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+
+  " Mouse
+  set mouse=a
+  inoremap <Esc>[62~ <C-X><C-E>
+  inoremap <Esc>[63~ <C-X><C-Y>
+  inoremap <Esc>[62~ <C-E>
+  inoremap <Esc>[63~ <C-Y>
+endif
 
 " }}}
 
