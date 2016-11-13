@@ -5,6 +5,8 @@
 
 syntax enable
 
+set backspace=indent,eol,start
+
 " Colors {{{
 " }}}
 
@@ -73,6 +75,12 @@ nnoremap <leader>n :bn<CR>
 
 " }}}
 
+" Auto-Complete Config {{{
+
+autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+" }}}
+
 " Plugins {{{
 
 call plug#begin('~/vimfiles/plugged')
@@ -82,6 +90,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'rking/ag.vim'
+Plug 'lifepillar/vim-mucomplete'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'alvan/vim-closetag'
+Plug 'jiangmiao/auto-pairs'
+Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-surround'
+
+" Linting
+Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -89,32 +107,38 @@ call plug#end()
 
 " airline {{{
 
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 1
 
 " }}}
 
 " ConEmu Config {{{
 
 if !empty($CONEMUBUILD)
-  " Visual
-  set term=xterm
-  set encoding=utf-8
-  set termencoding=&encoding
-  set t_Co=16
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
+    " Visual
+    set term=xterm
+    set encoding=utf-8
+    set termencoding=&encoding
+    set t_Co=16
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
 
-  " Mouse
-  set mouse=a
-  inoremap <Esc>[62~ <C-X><C-E>
-  inoremap <Esc>[63~ <C-X><C-Y>
-  inoremap <Esc>[62~ <C-E>
-  inoremap <Esc>[63~ <C-Y>
+    " Mouse
+    set mouse=a
+    inoremap <Esc>[62~ <C-X><C-E>
+    inoremap <Esc>[63~ <C-X><C-Y>
+    nnoremap <Esc>[62~ <C-E>
+    nnoremap <Esc>[63~ <C-Y>
+
+    " Backspace fix
+    inoremap <Char-0x07F> <BS>
+    nnoremap <Char-0x07F> <BS>
 endif
 
 " }}}
+
+let g:closetag_filenames = "*.html,*.xml,*.htm,*.xsl,*.xsd"
 
 "set colorcolumn=80
 set modelines=1
