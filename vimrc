@@ -1,4 +1,5 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Matt's vimrc
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -12,10 +13,10 @@ set backspace=indent,eol,start
 
 " Spaces & Tabs {{{
 
-set tabstop=2               " number of visual spaces per TAB
-set softtabstop=2           " number of spaces in tab when editing
+set tabstop=4               " number of visual spaces per TAB
+set softtabstop=4           " number of spaces in tab when editing
 set expandtab               " tabs are spaces
-set shiftwidth=2            " number of spaces when using << and >>
+set shiftwidth=4            " number of spaces when using << and >>
 
 " }}}
 
@@ -38,7 +39,8 @@ set hlsearch                " highlight matches
 " Folding {{{
 
 set foldenable              " enable folding
-set foldlevelstart=10       " open most folds by default
+set foldlevel=10             " 
+set foldlevelstart=1        " open most folds by default
 set foldnestmax=10          " 10 nested fold max
 set foldmethod=indent       " fold based on indent level
 
@@ -51,27 +53,37 @@ inoremap jj <esc>
 
 " }}}
 
+" File/Buffer Management {{{
+
+set hidden
+
+" }}}
+
 " Leader Shortcuts {{{
 
+" The | signifies the end of a command
 " set leader key to space
-let mapleader=" "
+let mapleader=" "|
 
 " save the file and keep editing
-nnoremap <leader>s :w<CR>
-nnoremap <leader>bw :w<CR>
+nnoremap <leader>s :w<CR>|
+"nnoremap <leader>bw :w<CR>|
 
 " save the file and exit
-nnoremap <leader>w :w<CR><bar>:bd<CR>
+nnoremap <leader>w :w<CR><bar>:bd<CR>|
 
 " quit without saving
-nnoremap <leader>bd :bd<CR>
+nnoremap <leader>bd :bd<CR>|
 
 " turn off search highlight
-nnoremap <leader><space> :noh<CR>
+nnoremap <leader><space> :noh<CR>|
 
 " buffer movement
-nnoremap <leader>p :bp<CR>
-nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>|
+nnoremap <leader>n :bn<CR>|
+
+" buffer movement with :b
+nnoremap <leader>b :ls<CR>:b<space>|
 
 " }}}
 
@@ -81,22 +93,43 @@ autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 
 " }}}
 
+" Vim Editing {{{
+
+nnoremap <leader>_d :e $MYVIMRC<CR>       :Edit .vimrc
+nnoremap <leader>_r :source $MYVIMRC<CR>  :Reload .vimrc
+
+" }}}
+
 " Plugins {{{
 
 call plug#begin('~/vimfiles/plugged')
 
+" Toggle relative line numbers with <C-N>
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+" Sweet buffer indicators and file info at top and bottom
 Plug 'vim-airline/vim-airline'
-Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline-themes'
+" File Navigation
+Plug 'jeetsukumaran/vim-filebeagle'
+" Fuzzy search through stuff
+Plug 'kien/ctrlp.vim'
+" Quick search for text in files
 Plug 'rking/ag.vim'
+" Auto completion engine
 Plug 'lifepillar/vim-mucomplete'
+" Auto completion library for C#
 Plug 'OmniSharp/omnisharp-vim'
+" Auto tag management
 Plug 'alvan/vim-closetag'
+" Auto pair management, i.e. quotes
 Plug 'jiangmiao/auto-pairs'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-grepper'
+" Notes plugins
+Plug 'xolox/vim-notes' | Plug 'xolox/vim-misc'
+" Graphical Undo
+Plug 'sjl/gundo.vim'
 
 " Linting
 Plug 'scrooloose/syntastic'
@@ -105,11 +138,19 @@ call plug#end()
 
 " }}}
 
+" Grepper Mappings {{{
+
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
+" }}}
+
 " airline {{{
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_theme='base16_twilight'
 
 " }}}
 
