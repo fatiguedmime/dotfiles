@@ -7,6 +7,8 @@
 syntax enable
 
 set backspace=indent,eol,start
+set ignorecase
+set smartcase
 
 " Colors {{{
 " }}}
@@ -130,6 +132,8 @@ Plug 'mhinz/vim-grepper'
 Plug 'xolox/vim-notes' | Plug 'xolox/vim-misc'
 " Graphical Undo
 Plug 'sjl/gundo.vim'
+" Vimwiki
+Plug 'vimwiki/vimwiki'
 
 " Linting
 Plug 'scrooloose/syntastic'
@@ -151,6 +155,32 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_theme='base16_twilight'
+
+" }}}
+
+" Vim-Notes Config {{{
+
+let g:notes_directories = ['~/Documents/Notes']
+
+" }}}
+
+" VimWiki Config {{{
+
+set nocompatible
+filetype plugin on
+syntax on
+
+nmap <Leader>wb <Plug>VimwikiGoBackLink
+
+" Allow for custom templates
+let g:vimwiki_list = [{
+  \ 'path': '$HOME/vimwiki',
+  \ 'template_path': '$HOME/vimwiki/templates',
+  \ 'template_default': 'default',
+  \ 'template_ext': '.html'}]
+
+" Auto update the table of contents on save
+"let g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_toc': 1}]
 
 " }}}
 
