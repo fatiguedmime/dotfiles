@@ -134,6 +134,9 @@ Plug 'xolox/vim-notes' | Plug 'xolox/vim-misc'
 Plug 'sjl/gundo.vim'
 " Vimwiki
 Plug 'vimwiki/vimwiki'
+" FZF
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Linting
 Plug 'scrooloose/syntastic'
@@ -207,6 +210,26 @@ if !empty($CONEMUBUILD)
     nnoremap <Char-0x07F> <BS>
 endif
 
+" }}}
+
+" CtrlP Config {{{
+let g:ctrlp_prompt_mappings = {
+  \ 'PrtBS()':      ['<c-h>'],
+  \ 'PrtCurLeft()': ['<left>'],
+  \ }
+" }}}
+
+" {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_xslt_checkers = ['syntax']
 " }}}
 
 let g:closetag_filenames = "*.html,*.xml,*.htm,*.xsl,*.xsd"
