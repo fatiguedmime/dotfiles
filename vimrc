@@ -238,4 +238,3 @@ let g:closetag_filenames = "*.html,*.xml,*.htm,*.xsl,*.xsd"
 set modelines=1
 
 " vim:foldmethod=marker:foldlevel=0
-" this is a trash comment that I don't need, titties
